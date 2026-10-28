@@ -1,0 +1,211 @@
+[
+  {
+    "id": 1,
+    "priority": 40,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "scheme": "https",
+          "host": "www.bing.com",
+          "queryTransform": {
+            "removeParams": [
+              "ens",
+              "ensearch"
+            ],
+            "addOrReplaceParams": [
+              {
+                "key": "cc",
+                "value": "us"
+              },
+              {
+                "key": "setmkt",
+                "value": "en-US"
+              },
+              {
+                "key": "mkt",
+                "value": "en-US"
+              },
+              {
+                "key": "setlang",
+                "value": "en-US"
+              },
+              {
+                "key": "bg_overseas",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "regexFilter": "^https?://(cn\\.bing\\.com|bing\\.com)/",
+      "resourceTypes": [
+        "main_frame"
+      ],
+      "isUrlFilterCaseSensitive": false
+    }
+  },
+  {
+    "id": 2,
+    "priority": 30,
+    "action": {
+      "type": "allow"
+    },
+    "condition": {
+      "regexFilter": "^https://www\\.bing\\.com/[^#]*[?&]bg_overseas=1(&|$)",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 20,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "queryTransform": {
+            "removeParams": [
+              "ens",
+              "ensearch"
+            ],
+            "addOrReplaceParams": [
+              {
+                "key": "cc",
+                "value": "us"
+              },
+              {
+                "key": "setmkt",
+                "value": "en-US"
+              },
+              {
+                "key": "mkt",
+                "value": "en-US"
+              },
+              {
+                "key": "setlang",
+                "value": "en-US"
+              },
+              {
+                "key": "bg_overseas",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://www\\.bing\\.com/($|\\?|search([/?]|$)|images([/?]|$)|videos([/?]|$)|news([/?]|$)|copilotsearch([/?]|$)|account/general([/?]|$))",
+      "resourceTypes": [
+        "main_frame"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 100,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "accept-language",
+          "operation": "set",
+          "value": "en-US,en;q=0.9,zh-CN;q=0.7"
+        }
+      ]
+    },
+    "condition": {
+      "requestDomains": [
+        "bing.com"
+      ]
+    }
+  },
+  {
+    "id": 100,
+    "priority": 100,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "accept-language",
+          "operation": "set",
+          "value": "en-US,en;q=0.9"
+        }
+      ]
+    },
+    "condition": {
+      "requestDomains": [
+        "msn.com",
+        "msn.cn"
+      ]
+    }
+  },
+  {
+    "id": 101,
+    "priority": 30,
+    "action": {
+      "type": "allow"
+    },
+    "condition": {
+      "regexFilter": "^https://(ntp\\.msn\\.(com|cn)/edge/ntp|(?:assets|api)\\.msn\\.(com|cn)/service/news/feed)(/[^?#]*)?\\?([^#]*&)?bg_ntp_us=1(&|$)",
+      "requestMethods": [
+        "get"
+      ],
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame",
+        "xmlhttprequest",
+        "other"
+      ],
+      "isUrlFilterCaseSensitive": false
+    }
+  },
+  {
+    "id": 102,
+    "priority": 20,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "queryTransform": {
+            "addOrReplaceParams": [
+              {
+                "key": "market",
+                "value": "en-us"
+              },
+              {
+                "key": "cm",
+                "value": "en-us"
+              },
+              {
+                "key": "locale",
+                "value": "en-US"
+              },
+              {
+                "key": "bg_ntp_us",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://(ntp\\.msn\\.(com|cn)/edge/ntp|(?:assets|api)\\.msn\\.(com|cn)/service/news/feed)(/|\\?|$)",
+      "requestMethods": [
+        "get"
+      ],
+      "resourceTypes": [
+        "main_frame",
+        "sub_frame",
+        "xmlhttprequest",
+        "other"
+      ],
+      "isUrlFilterCaseSensitive": false
+    }
+  }
+]

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>必应海外版守卫</title><link rel="stylesheet" href="ui.css"></head>
+<body><main><p class="eyebrow">EDGE · BING OVERSEAS GUARD</p><h1>必应海外版守卫</h1><p>自定义新标签页提供必应搜索、搜索建议、快捷方式、天气和轮换背景。</p>
+<div id="status" role="status">正在读取状态…</div>
+<div id="ntp-status" role="status"></div>
+<label for="port">本地 HTTP 代理端口</label><input id="port" type="number" min="1" max="65535" value="7897"><p class="muted">只连接 127.0.0.1，不修改或启动代理软件。已有线路必须能访问海外必应。</p>
+<div class="actions"><button id="enable">启用浏览器专用线路</button><button id="verify">验证必应地区</button><button id="disable" class="secondary">停用线路</button></div>
+<p id="result" role="status"></p>
+<details><summary>影响范围与恢复</summary><p>本扩展将必应和 MSN 及其子域名送到指定本地端口，没有 DIRECT 失败回退。浏览器内其他域名使用 DIRECT；系统底层已有的网络路由仍然生效，但不会继承系统 HTTP 代理。若浏览器已有其他专用代理扩展或 PAC，则拒绝覆盖。</p><p>默认搜索和新标签页由扩展提供。扩展维护 MSN 的 ntps 和 sptmarket 地区 Cookie，并设置 MSN 请求的英语语言头，并尝试为部分 MSN 资讯 GET 接口设置美国地区参数。规则是否命中及内容是否采用美国版需要在 Edge 实测；内部请求、账号、缓存和服务器仍可能影响内容。移除或停用整个扩展可撤回这些浏览器变更。仅点击“停用线路”会使守卫停止展示必应页面，直到重新启用。</p><p>不读取密码、不保存搜索词、不使用统计服务，不更改注册表、Windows 或代理软件。网站仍可能通过网络出口、Cookie 或账号判断地区。本扩展只能检测已知页面标识，不能保证必应服务端永远不变。</p></details>
+</main><script src="shared.js"></script><script src="region.js"></script><script src="options.js"></script></body></html>

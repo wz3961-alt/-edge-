@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "必应海外版守卫",
+  "version": "1.2.5",
+  "description": "必应搜索、自定义快捷方式、天气和轮换背景的新标签页。",
+  "permissions": [
+    "proxy",
+    "storage",
+    "declarativeNetRequestWithHostAccess",
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://bing.com/*",
+    "https://*.bing.com/*",
+    "http://bing.com/*",
+    "http://*.bing.com/*",
+    "https://msn.com/*",
+    "https://*.msn.com/*",
+    "https://msn.cn/*",
+    "https://*.msn.cn/*",
+    "https://api.open-meteo.com/*",
+    "https://geocoding-api.open-meteo.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "options.html",
+    "default_title": "必应海外版守卫"
+  },
+  "options_page": "options.html",
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "必应海外版守卫",
+      "keyword": "bing-us",
+      "favicon_url": "https://www.bing.com/favicon.ico",
+      "search_url": "https://www.bing.com/search?q={searchTerms}&cc=us&setmkt=en-US&mkt=en-US&setlang=en-US",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "bing_us",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bing.com/*",
+        "https://*.bing.com/*"
+      ],
+      "js": [
+        "shared.js",
+        "region.js",
+        "guard.js"
+      ],
+      "css": [
+        "guard.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  }
+}
